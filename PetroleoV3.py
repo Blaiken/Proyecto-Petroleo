@@ -297,7 +297,6 @@ class UtilidadNeta:
         print(f"- Utilidad neta: {self.c_utilidad_neta()}")
 
 while True:
-    archivo = open("Universidad\Datos diarios.txt", "a")
     print("----------- MENÚ -------------")
     print("1) Ingresar trabajo del dÍa")
     print("2) Ver resultado total semanal")
