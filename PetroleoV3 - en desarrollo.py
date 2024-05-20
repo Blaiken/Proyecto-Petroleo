@@ -1,14 +1,54 @@
 from datetime import date
+import os
 
-with open("Universidad\\contador.txt", "w") as contador_inicial:
-    contador_inicial.write("1")
+#with open("Universidad\\contador.txt", "w") as contador_inicial:
+    #contador_inicial.write("1")
     
-contador = open("Universidad\\contador.txt", "r")
-contenido = contador.readline()
-contador.close()
+#contador = open("Universidad\\contador.txt", "r")
+#contenido = contador.readline()
 
-ruta_diario = f"Universidad\\Datos_diarios_{contenido}.txt"
-ruta_semanal = f"Universidad\\Datos_semanal_{contenido}.txt"
+#f"Universidad\\Datos_diarios_{self.contador}.txt" = f"Universidad\\Datos_diarios_{contenido}.txt"
+#f"Universidad\\Datos_semanal_{self.contador}.txt" = f"Universidad\\Datos_semanal_{contenido}.txt"
+
+CWD = os.getcwd()
+
+class FileManager:
+    def __init__(self):
+        self.filenames = list(filter(lambda f: f.endswith(".txt"), os.listdir(CWD)))
+        
+        # Contiene la cantidad de archivos diarios o por semana
+        # que se han creado
+        self.contador = len(self.filenames)
+        
+        # Contiene el archivo actual con el que estamos trabajando.
+        # Esto sirve como cache para evitar tener que reabrir el
+        # archivo varias veces.
+        self.archivo_s_actual = None
+        self.archivo_d_actual = None
+    
+    # Devuelve el objeto del archivo actual con el que estamos
+    # trabajando los datos semanales.
+    def obtener_archivo_semanal(self, mode="a"):
+        if self.archivo_s_actual:
+            return self.archivo_s_actual
+        self.archivo_s_actual = open(f"Universidad\\Datos_semanal_{self.contador}.txt", mode)
+        return self.archivo_s_actual
+    
+    # Devuelve el objeto del archivo actual con el que estamos
+    # trabajando los datos diarios. Si el archivo supera las
+    # 160 líneas, se crea un nuevo archivo y se devuelve ese.
+    def obtener_archivo_diario(self, mode="a"):
+        if self.archivo_d_actual:
+            return self.archivo_d_actual
+        self.archivo_d_actual = open(self.filenames[-1], mode)
+        if self.es_fin_de_semana():
+            self.archivo_d_actual.close()
+            self.contador += 1
+            self.archivo_d_actual = open(f"Universidad\\Datos_diarios_{self.contador}.txt", mode)
+        return self.archivo_d_actual
+    
+    def es_fin_de_semana(self):
+        return len(self.archivo_d_actual.readlines()) >= 160
 
 class PozoPetrolero:
     def __init__(self):
@@ -23,7 +63,7 @@ class PozoPetrolero:
         return self.__capacidad_tanque
         
     def informe_capacidad_tanque(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"DATOS DIARIOS:\n\n- Limite de los tanques:\n{self.get_capacidad_tanque()[0]}")
         print(f"- Capacidad del tanque: {self.get_capacidad_tanque()[0]}")
         
@@ -34,7 +74,7 @@ class PozoPetrolero:
         return self.__cantidad_tanques   
     
     def informe_cantidad_tanques(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Cantidad de los tanques:\n{self.get_cantidad_tanques()[0]}")
         print(f"- Cantidad tanques: {self.get_cantidad_tanques()[0]}")
         
@@ -45,7 +85,7 @@ class PozoPetrolero:
         return self.__horas_trabajadas
         
     def informe_horas_trabajadas(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Horas trabajadas:\n{self.get_horas_trabajadas()[0]}")
         print(f"- Horas trabajadas: {self.get_horas_trabajadas()[0]}")
         
@@ -61,7 +101,7 @@ class Produccion:
         return self.__fecha_produccion_diaria
         
     def informe_fecha_produccion_diaria(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Fecha:\n{self.get_fecha_produccion_diaria()[0]}")
         print(f"- Fecha: {self.get_fecha_produccion_diaria()[0]}")
     
@@ -70,43 +110,43 @@ class Produccion:
         return produccion_diaria
     
     def informe_produccion_diaria(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Producción diaria:\n{self.c_produccion_diaria()}")
         print(f"- Producción diaria: {self.c_produccion_diaria()}")
         
     def c_produccion_semanal(self):
         
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[11]
             linea1 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[34]
             linea2 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[57]
             linea3 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[80]
             linea4 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[103]
             linea5 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[126]
             linea6 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[149]
             linea7 = linea_especifica.strip()
@@ -115,7 +155,7 @@ class Produccion:
         return produccion_semanal
     
     def informe_produccion_semanal(self):
-        with open(ruta_semanal, "a") as archivo:
+        with open(f"Universidad\\Datos_semanal_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"DATOS SEMANAL:\n\n- Producción semanal:\n{self.c_produccion_semanal()}")
         print(f"- Producción semanal: {self.c_produccion_semanal()}")
         
@@ -131,7 +171,7 @@ class Valor:
         return self.__fecha_actual
         
     def informe_fecha_actual(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Fecha actual:\n{self.get_fecha_actual()[0]}")
         print(f"- Fecha actual: {self.get_fecha_actual()[0]}")
         
@@ -142,7 +182,7 @@ class Valor:
         return self.__precio_actual_barril
         
     def informe_precio_barril_actual(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Precio barril actual:\n{self.get_precio_actual_barril()[0]}")
         print(f"- Precio barril actual: {self.get_precio_actual_barril()[0]}")
     
@@ -177,42 +217,42 @@ class Operaciones:
         return costo_total_diario
         
     def informe_costo_total_diario(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Costo total diario:\n{self.c_costo_total_diario()}")
         print(f"- Costo total diario: {self.c_costo_total_diario()}")
         
     def c_costo_total_semanal(self):
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[17]
             linea1 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[40]
             linea2 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[63]
             linea3 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[86]
             linea4 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[109]
             linea5 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[132]
             linea6 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[155]
             linea7 = linea_especifica.strip()
@@ -221,7 +261,7 @@ class Operaciones:
         return costo_total_semanal
             
     def informe_costo_total_semanal(self):
-        with open(ruta_semanal, "a") as archivo:
+        with open(f"Universidad\\Datos_semanal_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Costo total semanal:\n{self.c_costo_total_semanal()}")
         print(f"- Costo total semanal: {self.c_costo_total_semanal()}")
         
@@ -230,7 +270,7 @@ class Operaciones:
         return precio_venta_diario_barril
     
     def informe_precio_venta_diario_barril(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Precio venta diario del barril:\n{self.c_precio_venta_diario_barril()}")
         print(f"- Precio venta diario del barril: {self.c_precio_venta_diario_barril()}")
 
@@ -244,42 +284,42 @@ class Ventas:
         return ingreso_diario
     
     def informe_ingreso_diario(self):
-        with open(ruta_diario, "a") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Ingreso diario:\n{self.c_ingreso_diario()}\n\n")
         print(f"- Ingreso diario: {self.c_ingreso_diario()}")
         
     def c_ingreso_semanal(self):
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[21]
             linea1 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[44]
             linea2 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[67]
             linea3 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[90]
             linea4 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[113]
             linea5 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[136]
             linea6 = linea_especifica.strip()
             
-        with open(ruta_diario, "r") as archivo:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as archivo:
             lineas = archivo.readlines()
             linea_especifica = lineas[159]
             linea7 = linea_especifica.strip()
@@ -288,7 +328,7 @@ class Ventas:
         return ingreso_semanal
     
     def informe_ingreso_semanal(self):
-        with open(ruta_semanal, "a") as archivo:
+        with open(f"Universidad\\Datos_semanal_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Ingreso semanal:\n{self.c_ingreso_semanal()}")
         print(f"- Ingreso semanal: {self.c_ingreso_semanal()}")
 
@@ -302,7 +342,7 @@ class UtilidadNeta:
         return utilidad_neta
     
     def informe_utilidad_neta(self):
-        with open(ruta_semanal, "a") as archivo:
+        with open(f"Universidad\\Datos_semanal_{GestArch.contador}.txt", "a") as archivo:
             archivo.writelines(f"\n- Utilidad neta:\n{self.c_utilidad_neta()}")
         print(f"- Utilidad neta: {self.c_utilidad_neta()}")
 
@@ -314,6 +354,7 @@ while True:
     print("------------------------------")
     opcion = int(input("Opción: "))
 
+    GestArch = FileManager()
     Pozo = PozoPetrolero()
     Prod = Produccion(Pozo)
     Val = Valor()
@@ -323,15 +364,15 @@ while True:
 
     if opcion == 1:
         
-        archivo = open(f"Universidad\\Datos_diarios_{contenido}.txt", "a")
+        archivo = open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "a")
         archivo.close()
         
-        with open(f"Universidad\\Datos_diarios_{contenido}.txt", "r") as f:
+        with open(f"Universidad\\Datos_diarios_{GestArch.contador}.txt", "r") as f:
             lineas = f.readlines()
             
             if len(lineas) >= 160:
                 
-                suma = int(contenido) + 1
+                suma = int(GestArch.contador) + 1
                 caracter = str(suma)
                 archivo = open(f"Universidad\\contador.txt", "w")
                 archivo.writelines(caracter)
