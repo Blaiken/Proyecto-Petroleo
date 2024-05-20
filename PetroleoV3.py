@@ -13,10 +13,9 @@ class PozoPetrolero:
         return self.__capacidad_tanque
         
     def informe_capacidad_tanque(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"DATOS:\n- Limite de los tanques: {self.get_capacidad_tanque()}")
-        archivo.close()
-        print(f"- Capacidad del tanque: {self.get_capacidad_tanque()}")
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"DATOS DIARIOS:\n\n- Limite de los tanques:\n{self.get_capacidad_tanque()[0]}")
+        print(f"- Capacidad del tanque: {self.get_capacidad_tanque()[0]}")
         
     def set_cantidad_tanques(self, can_tanques):
         self.__cantidad_tanques.append(can_tanques)
@@ -25,10 +24,9 @@ class PozoPetrolero:
         return self.__cantidad_tanques   
     
     def informe_cantidad_tanques(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Cantidad de los tanques: {self.get_cantidad_tanques()}")
-        archivo.close()
-        print(f"- Cantidad tanques: {self.get_cantidad_tanques()}")
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Cantidad de los tanques:\n{self.get_cantidad_tanques()[0]}")
+        print(f"- Cantidad tanques: {self.get_cantidad_tanques()[0]}")
         
     def set_horas_trabajadas(self, hrs_trabajadas):
         self.__horas_trabajadas.append(hrs_trabajadas)
@@ -37,10 +35,9 @@ class PozoPetrolero:
         return self.__horas_trabajadas
         
     def informe_horas_trabajadas(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Cantidad de los tanques: {self.get_horas_trabajadas()}")
-        archivo.close()
-        print(f"- Horas trabajadas: {self.get_horas_trabajadas()}")
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Horas trabajadas:\n{self.get_horas_trabajadas()[0]}")
+        print(f"- Horas trabajadas: {self.get_horas_trabajadas()[0]}")
         
 class Produccion:
     def __init__(self, pozo):
@@ -54,9 +51,8 @@ class Produccion:
         return self.__fecha_produccion_diaria
         
     def informe_fecha_produccion_diaria(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Fecha: {self.get_fecha_produccion_diaria()[0]}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Fecha:\n{self.get_fecha_produccion_diaria()[0]}")
         print(f"- Fecha: {self.get_fecha_produccion_diaria()[0]}")
     
     def c_produccion_diaria(self):
@@ -64,47 +60,53 @@ class Produccion:
         return produccion_diaria
     
     def informe_produccion_diaria(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Producción diaria: {self.c_produccion_diaria()}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Producción diaria:\n{self.c_produccion_diaria()}")
         print(f"- Producción diaria: {self.c_produccion_diaria()}")
         
     def c_produccion_semanal(self):
-        with open("Datos.txt", "r") as file:
-            file.seek(150)
-            contenido1 = file.read(155 - 150)
+        
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[11]
+            linea1 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(464)
-            contenido2 = file.read(469 - 464)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[34]
+            linea2 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(779)
-            contenido3 = file.read(784 - 779)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[57]
+            linea3 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1093)
-            contenido4 = file.read(1098 - 1093)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[80]
+            linea4 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1408)
-            contenido5 = file.read(1413 - 1408)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[103]
+            linea5 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1723)
-            contenido6 = file.read(1728 - 1723)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[126]
+            linea6 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(2038)
-            contenido7 = file.read(2043 - 2038)
-            
-        produccion_semanal = float(contenido1) + float(contenido2) + float(contenido3) + float(contenido4) + float(contenido5) + float(contenido6) + float(contenido7)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[149]
+            linea7 = linea_especifica.strip()
+
+        produccion_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return produccion_semanal
     
     def informe_produccion_semanal(self):
-        archivo = open("Datos semanal.txt", "a")
-        archivo.writelines(f"DATOS SEMANAL:\n- Producción semanal: {self.c_produccion_semanal()}")
-        archivo.close()
+        with open("Universidad\\Datos semanal.txt", "a") as archivo:
+            archivo.writelines(f"DATOS SEMANAL:\n\n- Producción semanal:\n{self.c_produccion_semanal()}")
         print(f"- Producción semanal: {self.c_produccion_semanal()}")
         
 class Valor:
@@ -119,9 +121,8 @@ class Valor:
         return self.__fecha_actual
         
     def informe_fecha_actual(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Fecha actual: {self.get_fecha_actual()[0]}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Fecha actual:\n{self.get_fecha_actual()[0]}")
         print(f"- Fecha actual: {self.get_fecha_actual()[0]}")
         
     def set_precio_actual_barril(self, precio_actual):
@@ -131,52 +132,9 @@ class Valor:
         return self.__precio_actual_barril
         
     def informe_precio_barril_actual(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Precio barril actual: {self.get_precio_actual_barril()[0]}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Precio barril actual:\n{self.get_precio_actual_barril()[0]}")
         print(f"- Precio barril actual: {self.get_precio_actual_barril()[0]}")
-        
-    def set_precio_total_semanal(self):
-        with open("Datos.txt", "r") as file:
-            file.seek(209)
-            contenido1 = file.read(214 - 209)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(523)
-            contenido2 = file.read(528 - 523)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(838)
-            contenido3 = file.read(843 - 838)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(1152)
-            contenido4 = file.read(1157 - 1152)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(1467)
-            contenido5 = file.read(1472 - 1467)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(1782)
-            contenido6 = file.read(1787 - 1782)
-            
-        with open("Datos.txt", "r") as file:
-            file.seek(2097)
-            contenido7 = file.read(2102 - 2097)
-            
-        precio_total_semanal = round(float(contenido1) + float(contenido2) + float(contenido3) + float(contenido4) + float(contenido5) + float(contenido6) + float(contenido7), 3)
-        return precio_total_semanal
-            
-    def get_precio_total_semanal(self):
-        pts = self.set_precio_total_semanal()
-        return pts
-    
-    def informe_precio_total_semanal(self):
-        archivo = open("Datos semanal.txt", "a")
-        archivo.writelines(f"\n- Precio  total semanal: {self.get_precio_total_semanal()}")
-        archivo.close()
-        print(f"- Precio total semanal: {self.get_precio_total_semanal()}")
     
 class Operaciones:
     def __init__(self, produccion, valor):
@@ -209,47 +167,52 @@ class Operaciones:
         return costo_total_diario
         
     def informe_costo_total_diario(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Costo total diario: {self.c_costo_total_diario()}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Costo total diario:\n{self.c_costo_total_diario()}")
         print(f"- Costo total diario: {self.c_costo_total_diario()}")
         
     def c_costo_total_semanal(self):
-        with open("Datos.txt", "r") as file:
-            file.seek(238)
-            contenido1 = file.read(242 - 238)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[17]
+            linea1 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(552)
-            contenido2 = file.read(556 - 552)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[40]
+            linea2 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(867)
-            contenido3 = file.read(871 - 867)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[63]
+            linea3 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1181)
-            contenido4 = file.read(1185 - 1181)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[86]
+            linea4 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1496)
-            contenido5 = file.read(1500 - 1496)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[109]
+            linea5 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1811)
-            contenido6 = file.read(1815 - 1811)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[132]
+            linea6 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(2126)
-            contenido7 = file.read(2130 - 2126)
-            
-        costo_total_semanal = float(contenido1) + float(contenido2) + float(contenido3) + float(contenido4) + float(contenido5) + float(contenido6) + float(contenido7)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[155]
+            linea7 = linea_especifica.strip()
+
+        costo_total_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return costo_total_semanal
             
     def informe_costo_total_semanal(self):
-        archivo = open("Datos semanal.txt", "a")
-        archivo.writelines(f"\n- Costo total semanal: {self.c_costo_total_semanal()}")
-        archivo.close()
+        with open("Universidad\\Datos semanal.txt", "a") as archivo:
+            archivo.writelines(f"\n- Costo total semanal:\n{self.c_costo_total_semanal()}")
         print(f"- Costo total semanal: {self.c_costo_total_semanal()}")
         
     def c_precio_venta_diario_barril(self):
@@ -257,9 +220,8 @@ class Operaciones:
         return precio_venta_diario_barril
     
     def informe_precio_venta_diario_barril(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Precio venta diario del barril: {self.c_precio_venta_diario_barril()}")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Precio venta diario del barril:\n{self.c_precio_venta_diario_barril()}")
         print(f"- Precio venta diario del barril: {self.c_precio_venta_diario_barril()}")
 
 class Ventas:
@@ -272,47 +234,52 @@ class Ventas:
         return ingreso_diario
     
     def informe_ingreso_diario(self):
-        archivo = open("Datos.txt", "a")
-        archivo.writelines(f"\n- Ingreso diario: {self.c_ingreso_diario()}\n\n")
-        archivo.close()
+        with open("Universidad\\Datos diarios.txt", "a") as archivo:
+            archivo.writelines(f"\n- Ingreso diario:\n{self.c_ingreso_diario()}\n\n")
         print(f"- Ingreso diario: {self.c_ingreso_diario()}")
         
     def c_ingreso_semanal(self):
-        with open("Datos.txt", "r") as file:
-            file.seek(304)
-            contenido1 = file.read(310 - 304)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[21]
+            linea1 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(618)
-            contenido2 = file.read(625 - 618)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[44]
+            linea2 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(933)
-            contenido3 = file.read(939 - 933)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[67]
+            linea3 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1247)
-            contenido4 = file.read(1254 - 1247)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[90]
+            linea4 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1562)
-            contenido5 = file.read(1569 - 1562)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[113]
+            linea5 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(1877)
-            contenido6 = file.read(1884 - 1877)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[136]
+            linea6 = linea_especifica.strip()
             
-        with open("Datos.txt", "r") as file:
-            file.seek(2193)
-            contenido7 = file.read(2199 - 2193)
-            
-        ingreso_semanal = round(float(contenido1) + float(contenido2) + float(contenido3) + float(contenido4) + float(contenido5) + float(contenido6) + float(contenido7), 3)
+        with open("Universidad\\Datos diarios.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            linea_especifica = lineas[159]
+            linea7 = linea_especifica.strip()
+
+        ingreso_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return ingreso_semanal
     
     def informe_ingreso_semanal(self):
-        archivo = open("Datos semanal.txt", "a")
-        archivo.writelines(f"\n- Ingreso semanal: {self.c_ingreso_semanal()}")
-        archivo.close()
+        with open("Universidad\\Datos semanal.txt", "a") as archivo:
+            archivo.writelines(f"\n- Ingreso semanal:\n{self.c_ingreso_semanal()}")
         print(f"- Ingreso semanal: {self.c_ingreso_semanal()}")
 
 class UtilidadNeta:
@@ -325,12 +292,12 @@ class UtilidadNeta:
         return utilidad_neta
     
     def informe_utilidad_neta(self):
-        archivo = open("Datos semanal.txt", "a")
-        archivo.writelines(f"\n- Utilidad neta: {self.c_utilidad_neta()}")
-        archivo.close()
+        with open("Universidad\\Datos semanal.txt", "a") as archivo:
+            archivo.writelines(f"\n- Utilidad neta:\n{self.c_utilidad_neta()}")
         print(f"- Utilidad neta: {self.c_utilidad_neta()}")
 
 while True:
+    archivo = open("Universidad\Datos diarios.txt", "a")
     print("----------- MENÚ -------------")
     print("1) Ingresar trabajo del dÍa")
     print("2) Ver resultado total semanal")
@@ -344,7 +311,6 @@ while True:
     Op = Operaciones(Prod, Val)
     Ven = Ventas(Op, Prod)
     UN = UtilidadNeta(Ven, Op)
-
 
     if opcion == 1:
         
@@ -411,7 +377,6 @@ while True:
         
     elif opcion == 2:
         Prod.informe_produccion_semanal()
-        Val.informe_precio_total_semanal()
         Op.informe_costo_total_semanal()
         Ven.informe_ingreso_semanal()
         UN.informe_utilidad_neta()
@@ -421,4 +386,3 @@ while True:
     else:
         print("Finalizando programa...")
         break
-    
