@@ -1,4 +1,5 @@
 from datetime import date
+import os
 
 with open("Universidad\\contador.txt", "w") as contador_inicial:
     contador_inicial.write("1")
@@ -90,40 +91,19 @@ class Produccion:
         
     def c_produccion_semanal(self):
         
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[13]
-            linea1 = linea_especifica.strip()
+        def leer_lineas(linea):
+            with open(ruta_diario, "r") as arch:
+                lineas = arch.readlines()
+                lineas_especificas = lineas[linea]
+                return lineas_especificas
             
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[40]
-            linea2 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[67]
-            linea3 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[94]
-            linea4 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[121]
-            linea5 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[148]
-            linea6 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[175]
-            linea7 = linea_especifica.strip()
+        linea1 = leer_lineas(13)
+        linea2 = leer_lineas(40)
+        linea3 = leer_lineas(67)
+        linea4 = leer_lineas(94)
+        linea5 = leer_lineas(121)
+        linea6 = leer_lineas(148)    
+        linea7 = leer_lineas(175)
 
         produccion_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return produccion_semanal
@@ -131,6 +111,7 @@ class Produccion:
     def informe_produccion_semanal(self):
         with open(ruta_semanal, "w") as archivo:
             archivo.writelines(f"DATOS SEMANAL:\n\n- Producción semanal:\n{self.c_produccion_semanal()}")
+        print("------------------------------")
         print(f"- Producción semanal: {self.c_produccion_semanal()}")
         
 class Valor:
@@ -209,40 +190,19 @@ class Operaciones:
         
     def c_costo_total_semanal(self):
         
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[21]
-            linea1 = linea_especifica.strip()
+        def leer_lineas(linea):
+            with open(ruta_diario, "r") as arch:
+                lineas = arch.readlines()
+                lineas_especificas = lineas[linea]
+                return lineas_especificas
             
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[48]
-            linea2 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[75]
-            linea3 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[102]
-            linea4 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[129]
-            linea5 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[156]
-            linea6 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[183]
-            linea7 = linea_especifica.strip()
+        linea1 = leer_lineas(21)
+        linea2 = leer_lineas(48)
+        linea3 = leer_lineas(75)
+        linea4 = leer_lineas(102)
+        linea5 = leer_lineas(129)
+        linea6 = leer_lineas(156)
+        linea7 = leer_lineas(183)
 
         costo_total_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return costo_total_semanal
@@ -276,40 +236,20 @@ class Ventas:
         print(f"- Ingreso diario: {self.c_ingreso_diario()}")
         
     def c_ingreso_semanal(self):
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[25]
-            linea1 = linea_especifica.strip()
+        
+        def leer_lineas(linea):
+            with open(ruta_diario, "r") as arch:
+                lineas = arch.readlines()
+                lineas_especificas = lineas[linea]
+                return lineas_especificas
             
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[52]
-            linea2 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[79]
-            linea3 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[106]
-            linea4 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[133]
-            linea5 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[160]
-            linea6 = linea_especifica.strip()
-            
-        with open(ruta_diario, "r") as archivo:
-            lineas = archivo.readlines()
-            linea_especifica = lineas[187]
-            linea7 = linea_especifica.strip()
+        linea1 = leer_lineas(25)
+        linea2 = leer_lineas(52)
+        linea3 = leer_lineas(79)
+        linea4 = leer_lineas(106)
+        linea5 = leer_lineas(133)
+        linea6 = leer_lineas(160)
+        linea7 = leer_lineas(187)
 
         ingreso_semanal = round(float(linea1) + float(linea2) + float(linea3) + float(linea4) + float(linea5) + float(linea6) + float(linea7), 3)
         return ingreso_semanal
@@ -333,132 +273,135 @@ class UtilidadNeta:
             archivo.writelines(f"\n- Utilidad neta:\n{self.c_utilidad_neta()}")
         print(f"- Utilidad neta: {self.c_utilidad_neta()}")
 
-while True:
-    print("----------- MENÚ -------------")
-    print("1) Ingresar trabajo del dÍa")
-    print("2) Ver resultado total semanal")
-    print("3) Salir")
-    print("------------------------------")
-    opcion = int(input("Opción: "))
+def main():
 
-    Pozo = PozoPetrolero()
-    Prod = Produccion(Pozo)
-    Val = Valor()
-    Op = Operaciones(Prod, Val)
-    Ven = Ventas(Op, Prod)
-    UN = UtilidadNeta(Ven, Op)
+    while True:
+        print("----------- MENÚ -------------")
+        print("1) Ingresar trabajo del dÍa")
+        print("2) Ver resultado total semanal")
+        print("3) Salir")
+        print("------------------------------")
+        opcion = int(input("Opción: "))
+        print("------------------------------")
+        os.system('cls')
 
-    if opcion == 1:
-        
-        archivo = open(f"Universidad\\Datos_diarios_{contenido}.txt", "a")
-        archivo.close()
-        
-        with open(f"Universidad\\Datos_diarios_{contenido}.txt", "r") as f:
-            lineas = f.readlines()
+        Pozo = PozoPetrolero()
+        Prod = Produccion(Pozo)
+        Val = Valor()
+        Op = Operaciones(Prod, Val)
+        Ven = Ventas(Op, Prod)
+        UN = UtilidadNeta(Ven, Op)
+
+        if opcion == 1:
             
-            if len(lineas) >= 188:
+            archivo = open(ruta_diario, "a")
+            archivo.close()
+            
+            with open(ruta_diario, "r") as f:
+                lineas = f.readlines()
                 
-                suma = int(contenido) + 1
-                caracter = str(suma)
-                archivo = open(f"Universidad\\contador.txt", "w")
-                archivo.writelines(caracter)
-                archivo.close()
-                input("¡Ya has completado una semana!\nPresiona Enter para continuar...")
-                input("Si deseas registrar la siguiente semana, deberás cambiar el nombre\ndel archivo Datos_diarios_1.txt")
-                archivo = open(f"Universidad\\Datos_diarios_{caracter}.txt", "a")
-                archivo.close()
-                
-            else:
+                if len(lineas) >= 188:
+                    
+                    print("¡Ya has completado una semana!\nPara registrar la siguiente semana cambia el\nnombre del archivo -Datos_diarios_1.txt-")
+                    input("\nPresiona Enter para continuar...")
+                    os.system('cls')
+                    
+                else:
+            
+                    print("------------------------------")
+                    print("   DATOS - POZO PETROLERO ")
+                    print("------------------------------")
+                    cap_tanque = float(input("Ingrese la capacidad de los tanques: "))
+                    Pozo.set_capacidad_tanque(cap_tanque)
+                    can_tanques = int(input("Ingrese la cantidad de los tanques: "))
+                    Pozo.set_cantidad_tanques(can_tanques)
+                    hrs_trabajadas = int(input("Ingrese las horas trabajadas: "))
+                    Pozo.set_horas_trabajadas(hrs_trabajadas)
+                    tiempo_tanque = int(input("Ingrese las horas que dura en llenarse un tanque: "))
+                    Pozo.set_tiempo_en_llenarse_un_tanque(tiempo_tanque)
+                    
+                    print("------------------------------")
+                    print("  DATOS - DÍA DE PRODUCCIÓN")
+                    print("------------------------------")
+                    ano = int(input("Ingrese el año: "))
+                    mes = int(input("Ingrese el mes: "))
+                    dia = int(input("Ingrese el día: "))
+                    fecha_produccion_diaria = date(ano, mes, dia)
+                    Prod.set_fecha_produccion_diaria(fecha_produccion_diaria)
+                    
+                    print("------------------------------")
+                    print("    DATOS - PRECIO ACTUAL")
+                    print("------------------------------")
+                    ano = int(input("Ingrese el año: "))
+                    mes = int(input("Ingrese el mes: "))
+                    dia = int(input("Ingrese el día: "))
+                    fecha_valor_actual = date(ano, mes, dia)
+                    Val.set_fecha_actual(fecha_valor_actual)
+                    precio_actual_barril = float(input("Ingrese el precio actual del barril: "))
+                    Val.set_precio_actual_barril(precio_actual_barril)
+                    
+                    print("------------------------------")
+                    print("      DATOS - OPERACIONES")
+                    print("------------------------------")
+                    manten = float(input("Ingrese el costo del mantenimiento diario: "))
+                    suminis = float(input("Ingrese el costo de los suministros diarios: "))
+                    cantidad = int(input("Ingrese la cantidad del personal: "))
+                    personal = float(input("Ingrese el costo personal diario: "))
+                    Op.set_manten_diario(manten)
+                    Op.set_suminis_diario(suminis)
+                    Op.set_cantidad_personal(cantidad)
+                    Op.set_personal_diario(personal)
+                    
+                    print("------------------------------")
+                    print("          RESULTADOS")
+                    print("------------------------------")
+                    
+                    Pozo.informe_capacidad_tanque()
+                    Pozo.informe_cantidad_tanques()
+                    Pozo.informe_horas_trabajadas()
+                    Pozo.informe_tiempo_en_llenarse_un_tanque()
+                    
+                    Prod.informe_fecha_produccion_diaria()
+                    Prod.informe_produccion_diaria()
+                    
+                    Val.informe_fecha_actual()
+                    Val.informe_precio_barril_actual()
+                    
+                    Op.informe_cantidad_personal()
+                    Op.informe_costo_total_diario()
+                    Op.informe_precio_venta_diario_barril()
+                    
+                    Ven.informe_ingreso_diario()
+                    
+                    input("\nPresiona una tecla para continuar...")
+                    os.system('cls')
+            
+        elif opcion == 2:
+            
+            with open(ruta_diario, 'r') as f:
+                lineas = f.readlines()
+                if len(lineas) >= 188:
+                    
+                    Prod.informe_produccion_semanal()
+                    Op.informe_costo_total_semanal()
+                    Ven.informe_ingreso_semanal()
+                    UN.informe_utilidad_neta()
+                    
+                    input("\nPresiona una tecla para continuar...")
+                    os.system('cls')
+                    
+                else:
+                    print("Aun no tienes 7 días para esto.")
+                    input("Presiona una tecla para continuar...")
+                    os.system('cls')
+                    
+        elif opcion == 3:
+            print("Finalizando programa...")
+            break
         
-                print("-------------------------")
-                print(" DATOS - POZO PETROLERO ")
-                print("-------------------------")
-                cap_tanque = float(input("Ingrese la capacidad de los tanques: "))
-                Pozo.set_capacidad_tanque(cap_tanque)
-                can_tanques = int(input("Ingrese la cantidad de los tanques: "))
-                Pozo.set_cantidad_tanques(can_tanques)
-                hrs_trabajadas = int(input("Ingrese las horas trabajadas: "))
-                Pozo.set_horas_trabajadas(hrs_trabajadas)
-                tiempo_tanque = int(input("Ingrese las horas que dura en llenarse un tanque: "))
-                Pozo.set_tiempo_en_llenarse_un_tanque(tiempo_tanque)
-                
-                print("-------------------------")
-                print("DATOS - DÍA DE PRODUCCIÓN")
-                print("-------------------------")
-                ano = int(input("Ingrese el año: "))
-                mes = int(input("Ingrese el mes: "))
-                dia = int(input("Ingrese el día: "))
-                fecha_produccion_diaria = date(ano, mes, dia)
-                Prod.set_fecha_produccion_diaria(fecha_produccion_diaria)
-                
-                print("-------------------------")
-                print("  DATOS - PRECIO ACTUAL")
-                print("-------------------------")
-                ano = int(input("Ingrese el año: "))
-                mes = int(input("Ingrese el mes: "))
-                dia = int(input("Ingrese el día: "))
-                fecha_valor_actual = date(ano, mes, dia)
-                Val.set_fecha_actual(fecha_valor_actual)
-                precio_actual_barril = float(input("Ingrese el precio actual del barril: "))
-                Val.set_precio_actual_barril(precio_actual_barril)
-                
-                print("-------------------------")
-                print("   DATOS - OPERACIONES")
-                print("-------------------------")
-                manten = float(input("Ingrese el costo del mantenimiento diario: "))
-                suminis = float(input("Ingrese el costo de los suministros diarios: "))
-                cantidad = int(input("Ingrese la cantidad del personal: "))
-                personal = float(input("Ingrese el costo personal diario: "))
-                Op.set_manten_diario(manten)
-                Op.set_suminis_diario(suminis)
-                Op.set_cantidad_personal(cantidad)
-                Op.set_personal_diario(personal)
-                
-                print("-------------------------")
-                print("       RESULTADOS")
-                print("-------------------------")
-                
-                Pozo.informe_capacidad_tanque()
-                Pozo.informe_cantidad_tanques()
-                Pozo.informe_horas_trabajadas()
-                Pozo.informe_tiempo_en_llenarse_un_tanque()
-                
-                Prod.informe_fecha_produccion_diaria()
-                Prod.informe_produccion_diaria()
-                
-                Val.informe_fecha_actual()
-                Val.informe_precio_barril_actual()
-                
-                Op.informe_cantidad_personal()
-                Op.informe_costo_total_diario()
-                Op.informe_precio_venta_diario_barril()
-                
-                Ven.informe_ingreso_diario()
-                
-                input("Presiona una tecla para continuar...")
-        
-    elif opcion == 2:
-        
-        numero = input("Diga el numero del archivo que quiera saber el total: ")
-        
-        with open(f"Universidad\\Datos_diarios_{numero}.txt", 'r') as f:
-            lineas = f.readlines()
-            if len(lineas) >= 188:
-                
-                Prod.informe_produccion_semanal()
-                Op.informe_costo_total_semanal()
-                Ven.informe_ingreso_semanal()
-                UN.informe_utilidad_neta()
-                
-                input("Presiona una tecla para continuar...")
-                
-            else:
-                print("Aun no tienes 7 días para esto.")
-                input("Presiona una tecla para continuar...")
-                
-    elif opcion == 3:
-        print("Finalizando programa...")
-        break
-    
-    else:
-        input("No ha ejecutado una de las opciones...")
+        else:
+            input("No ha ejecutado una de las opciones...")
+            os.system('cls')
+            
+if __name__ == "__main__":
+    main()
