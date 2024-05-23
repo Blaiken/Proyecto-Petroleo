@@ -1,15 +1,8 @@
 from datetime import date
 import os
 
-with open("Universidad\\contador.txt", "w") as contador_inicial:
-    contador_inicial.write("1")
-    
-contador = open("Universidad\\contador.txt", "r")
-contenido = contador.readline()
-contador.close()
-
-ruta_diario = f"Universidad\\Datos_diarios_{contenido}.txt"
-ruta_semanal = f"Universidad\\Datos_semanal_{contenido}.txt"
+ruta_diario = f"Universidad\\Datos_diarios_1.txt"
+ruta_semanal = f"Universidad\\Datos_semanal_1.txt"
 
 class PozoPetrolero:
     def __init__(self):
